@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>セレクション株式会社</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --green-dark: #04342C;
+      --green-mid: #0F6E56;
+      --green: #1D9E75;
+      --green-light: #5DCAA5;
+      --green-pale: #E1F5EE;
+      --gray-900: #2C2C2A;
+      --gray-700: #5F5E5A;
+      --gray-400: #888780;
+      --gray-200: #D3D1C7;
+      --gray-50: #F1EFE8;
+      --white: #ffffff;
+      --font-sans: 'Noto Sans JP', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--gray-900);
+      background: var(--white);
+      line-height: 1.7;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      background: rgba(255,255,255,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid #e0e0da;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      height: 64px;
+    }
+    .nav-logo {
+      font-family: var(--font-sans);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--gray-900);
+      letter-spacing: 0.04em;
+      text-decoration: none;
+    }
+    .nav-logo em { color: var(--green); font-style: normal; }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 13px;
+      color: var(--gray-700);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--green); }
+    .nav-cta {
+      background: var(--green);
+      color: var(--white);
+      border: none;
+      padding: 9px 22px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--green-mid); }
+
+    /* HERO */
+    .hero {
+      background: var(--green-dark);
+      padding: 6rem 3rem 5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(29,158,117,0.25) 0%, transparent 70%);
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      background: rgba(255,255,255,0.1);
+      color: var(--green-light);
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      padding: 5px 18px;
+      border-radius: 20px;
+      border: 0.5px solid rgba(255,255,255,0.18);
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .hero h1 {
+      font-family: var(--font-sans);
+      font-size: 40px;
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.5;
+      letter-spacing: 0.02em;
+      margin-bottom: 1.25rem;
+      position: relative;
+    }
+    .hero p {
+      font-size: 15px;
+      color: rgba(255,255,255,0.65);
+      line-height: 1.9;
+      max-width: 580px;
+      margin: 0 auto 2.5rem;
+      position: relative;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      position: relative;
+    }
+    .btn-white {
+      background: var(--white);
+      color: var(--green-mid);
+      border: none;
+      padding: 13px 32px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: opacity 0.2s;
+    }
+    .btn-white:hover { opacity: 0.9; }
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border: 1.5px solid rgba(255,255,255,0.35);
+      padding: 13px 32px;
+      border-radius: 6px;
+      font-size: 14px;
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.06); }
+
+    /* SECTION COMMON */
+    section { padding: 5rem 3rem; }
+    .section-label {
+      font-size: 11px;
+      color: var(--green);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: var(--font-sans);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--gray-900);
+      letter-spacing: 0.02em;
+      margin-bottom: 0.75rem;
+    }
+    .section-sub {
+      font-size: 14px;
+      color: var(--gray-700);
+      line-height: 1.8;
+      max-width: 560px;
+    }
+
+    /* SERVICES */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 2.5rem;
+    }
+    @media (max-width: 700px) {
+      .services-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .service-card {
+      background: var(--white);
+      border: 0.5px solid #dedad3;
+      border-radius: 12px;
+      padding: 1.5rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .service-card:hover { border-color: var(--green); transform: translateY(-2px); }
+    .service-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--green-pale);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 22px;
+    }
+    .service-card h3 { font-size: 14px; font-weight: 700; color: var(--gray-900); margin-bottom: 0.5rem; }
+    .service-card p { font-size: 12px; color: var(--gray-700); line-height: 1.7; }
+
+    /* COMPANY */
+    .company-section { background: var(--gray-50); }
+    .company-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .company-table { width: 100%; border-collapse: collapse; margin-top: 2rem; }
+    .company-table tr { border-bottom: 0.5px solid #dedad3; }
+    .company-table td { padding: 14px 0; font-size: 14px; vertical-align: top; }
+    .company-table td:first-child { color: var(--gray-700); width: 130px; font-size: 13px; }
+    .tag-row { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 6px; }
+    .tag {
+      background: var(--green-pale);
+      color: var(--green-mid);
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+    .company-visual {
+      background: var(--green-dark);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin-top: 2rem;
+      color: var(--white);
+    }
+    .company-visual h3 {
+      font-family: var(--font-sans);
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--green-light);
+      letter-spacing: 0.04em;
+    }
+    .stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .stat { padding: 1rem; background: rgba(255,255,255,0.07); border-radius: 10px; }
+    .stat-label { font-size: 11px; color: rgba(255,255,255,0.5); margin-bottom: 4px; }
+    .stat-value { font-size: 20px; font-weight: 700; color: var(--white); }
+
+    /* CONTACT */
+    .contact-section {
+      background: var(--green-dark);
+      text-align: center;
+    }
+    .contact-section h2 {
+      font-family: var(--font-sans);
+      font-size: 26px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+    .contact-section p { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.8; margin-bottom: 2.5rem; }
+    .contact-form { display: flex; gap: 12px; max-width: 500px; margin: 0 auto 1rem; }
+    .contact-form input {
+      flex: 1;
+      padding: 13px 18px;
+      border-radius: 6px;
+      border: 0.5px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.08);
+      color: var(--white);
+      font-size: 14px;
+      font-family: var(--font-sans);
+      outline: none;
+    }
+    .contact-form input::placeholder { color: rgba(255,255,255,0.3); }
+    .contact-form input:focus { border-color: var(--green-light); }
+    .contact-form button {
+      background: var(--green);
+      color: var(--white);
+      border: none;
+      padding: 13px 28px;
+      border-radius: 6px;
+      font-size: 14px;
+      font-family: var(--font-sans);
+      font-weight: 500;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .contact-form button:hover { background: var(--green-mid); }
+    .contact-note { font-size: 12px; color: rgba(255,255,255,0.35); }
+
+    /* FOOTER */
+    footer {
+      background: var(--gray-900);
+      padding: 2.5rem 3rem;
+    }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .footer-logo {
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--gray-200);
+      letter-spacing: 0.04em;
+    }
+    .footer-logo em { color: var(--green-light); font-style: normal; }
+    .footer-links { display: flex; gap: 1.5rem; }
+    .footer-links a { font-size: 12px; color: var(--gray-400); text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gray-200); }
+    .footer-copy { font-size: 12px; color: var(--gray-400); }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">セレクション<em>株式会社</em></a>
+  <ul class="nav-links">
+    <li><a href="#service">事業内容</a></li>
+    <li><a href="#company">会社情報</a></li>
+    <li><a href="#contact">お問い合わせ</a></li>
+  </ul>
+  <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">お問い合わせ</button>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">大阪発 ITソリューション企業</div>
+  <h1>お客様のビジネスを、<br>テクノロジーで加速させる。</h1>
+  <p>ソフトウェア開発からWebサイト制作まで、セレクション株式会社がお客様の課題に寄り添い、最適なITソリューションをご提供します。</p>
+  <div class="hero-btns">
+    <button class="btn-white" onclick="document.getElementById('service').scrollIntoView({behavior:'smooth'})">事業内容を見る</button>
+    <button class="btn-outline" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">お問い合わせ</button>
+  </div>
+</div>
+
+<section id="service">
+  <div class="section-label">SERVICE</div>
+  <div class="section-title">私たちにできること</div>
+  <div class="section-sub">コンピュータ技術・Web・ECサイトから通信システムまで、幅広いITサービスを提供しています。</div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">💻</div>
+      <h3>ソフトウェア・ハードウェア開発</h3>
+      <p>企画・研究・開発・設計・製造・販売・保守・リース・賃貸・輸出入並びにコンサルティング業務</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🌐</div>
+      <h3>Webサイト・ホームページ制作</h3>
+      <p>ECサイト・各種ウェブサイトの企画・制作・販売・配信・運営・管理</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🖥️</div>
+      <h3>ITコンサルティング・操作指導</h3>
+      <p>コンピュータ操作指導等に関する事業</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📊</div>
+      <h3>データ入力・事務処理受託</h3>
+      <p>コンピュータシステムによるデータ入力及びそれに伴う事務処理の受託</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">📡</div>
+      <h3>通信・コンテンツ配信</h3>
+      <p>通信システムによる各種情報・画像・楽曲の提供・収集・配信・処理・販売</p>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🖨️</div>
+      <h3>機器・装置類の販売</h3>
+      <p>通信・コンテンツに係る機器・装置類の販売及び前各号に附帯関連する一切の事業</p>
+    </div>
+  </div>
+</section>
+
+<section id="company" class="company-section">
+  <div class="section-label">COMPANY</div>
+  <div class="section-title">会社情報</div>
+  <div class="company-inner">
+    <div>
+      <table class="company-table">
+        <tr>
+          <td>会社名</td>
+          <td>セレクション株式会社</td>
+        </tr>
+        <tr>
+          <td>代表取締役</td>
+          <td>坂田 祐介</td>
+        </tr>
+          <td>所在地</td>
+          <td>〒530-0001<br>大阪府大阪市北区梅田1丁目2番2号<br>大阪駅前第2ビル 12－12</td>
+        </tr>
+          <td>事業内容</td>
+          <td>
+            <div class="tag-row">
+              <span class="tag">ソフトウェア開発</span>
+              <span class="tag">Web制作</span>
+              <span class="tag">ECサイト</span>
+              <span class="tag">ITコンサル</span>
+              <span class="tag">データ処理</span>
+              <span class="tag">通信・コンテンツ</span>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact-section">
+  <div class="section-label" style="color: var(--green-light);">CONTACT</div>
+  <h2>まずはお気軽にご相談ください</h2>
+  <p>ITに関するお悩み・Webサイト制作のご依頼など、<br>どんな段階からでもお気軽にお問い合わせください。</p>
+  <div class="contact-form">
+    <input type="email" placeholder="メールアドレスを入力" />
+    <button type="button">送信する</button>
+  </div>
+  <p class="contact-note">送信後、担当者よりご連絡いたします。</p>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">セレクション<em>株式会社</em></div>
+    <div class="footer-links">
+      <a href="#">プライバシーポリシー</a>
+      <a href="#">サイトマップ</a>
+      <a href="#contact">お問い合わせ</a>
+    </div>
+    <div class="footer-copy">© 2025 セレクション株式会社 All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>
