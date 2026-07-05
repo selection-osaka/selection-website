@@ -83,6 +83,49 @@
       transition: background 0.2s;
     }
     .nav-cta:hover { background: var(--green-mid); }
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 32px;
+      height: 32px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--gray-900);
+      border-radius: 2px;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-links-mobile {
+      display: none;
+      list-style: none;
+      flex-direction: column;
+      background: var(--white);
+      border-bottom: 0.5px solid #e0e0da;
+      position: sticky;
+      top: 64px;
+      z-index: 199;
+    }
+    .nav-links-mobile.open { display: flex; }
+    .nav-links-mobile li a {
+      display: block;
+      padding: 14px 1.5rem;
+      font-size: 14px;
+      color: var(--gray-700);
+      text-decoration: none;
+      border-top: 0.5px solid #efeee8;
+    }
+    .nav-links-mobile li a:hover { color: var(--green); }
 
     /* HERO */
     .hero {
@@ -313,6 +356,40 @@
     .footer-links a { font-size: 12px; color: var(--gray-400); text-decoration: none; transition: color 0.2s; }
     .footer-links a:hover { color: var(--gray-200); }
     .footer-copy { font-size: 12px; color: var(--gray-400); }
+
+    /* RESPONSIVE */
+    @media (max-width: 860px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .nav-cta { display: none; }
+
+      .hero { padding: 3.5rem 1.5rem 3rem; }
+      .hero h1 { font-size: 28px; }
+      .hero p { font-size: 14px; }
+      .hero-btns { flex-direction: column; }
+      .hero-btns button { width: 100%; }
+
+      section { padding: 3rem 1.5rem; }
+      .section-title { font-size: 22px; }
+
+      .services-grid { grid-template-columns: 1fr; }
+
+      .company-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .company-table td:first-child { width: 100px; }
+
+      .contact-form { flex-direction: column; }
+      .contact-form button { width: 100%; }
+
+      footer { padding: 2rem 1.5rem; }
+      .footer-inner { flex-direction: column; align-items: flex-start; }
+      .footer-links { flex-wrap: wrap; gap: 1rem; }
+    }
+
+    @media (max-width: 480px) {
+      .hero h1 { font-size: 24px; }
+      .hero-eyebrow { font-size: 11px; padding: 4px 14px; }
+    }
   </style>
 </head>
 <body>
@@ -325,7 +402,15 @@
     <li><a href="#contact">お問い合わせ</a></li>
   </ul>
   <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">お問い合わせ</button>
+  <button class="nav-toggle" aria-label="メニューを開く" aria-expanded="false" onclick="toggleMobileNav(this)">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<ul class="nav-links-mobile" id="mobileNav">
+  <li><a href="#service" onclick="closeMobileNav()">事業内容</a></li>
+  <li><a href="#company" onclick="closeMobileNav()">会社情報</a></li>
+  <li><a href="#contact" onclick="closeMobileNav()">お問い合わせ</a></li>
+</ul>
 
 <div class="hero">
   <div class="hero-eyebrow">大阪発 ITソリューション企業</div>
@@ -389,9 +474,11 @@
           <td>代表取締役</td>
           <td>坂田 祐介</td>
         </tr>
+        <tr>
           <td>所在地</td>
           <td>〒530-0001<br>大阪府大阪市北区梅田1丁目2番2号<br>大阪駅前第2ビル 12－12</td>
         </tr>
+        <tr>
           <td>事業内容</td>
           <td>
             <div class="tag-row">
@@ -432,5 +519,16 @@
   </div>
 </footer>
 
+<script>
+  function toggleMobileNav(btn) {
+    const nav = document.getElementById('mobileNav');
+    const isOpen = nav.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  }
+  function closeMobileNav() {
+    document.getElementById('mobileNav').classList.remove('open');
+    document.querySelector('.nav-toggle').setAttribute('aria-expanded', 'false');
+  }
+</script>
 </body>
 </html>
